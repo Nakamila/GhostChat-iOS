@@ -10,7 +10,7 @@ import UIKit
 import CoreBluetooth
 
 
-class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralManagerDelegate,CBPeripheralDelegate {
+class ViewController: UIViewController,CBPeripheralManagerDelegate, CBCentralManagerDelegate,CBPeripheralDelegate, UITextFieldDelegate {
 
     // MARK: - Globals
     
@@ -47,6 +47,7 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralMa
 
     @IBAction func sendButtonPressed(sender: UIButton) {
         advertiseNewName(myTextField.text)
+        myTextField.resignFirstResponder()
 
     }
     
@@ -77,6 +78,10 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralMa
       //  statusText.text = passedString + "\r" + statusText.stringValue
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        myTextField.resignFirstResponder()
+        return false
+    }
     
     
     func putPeripheralManagerIntoMainQueue(){
@@ -415,10 +420,15 @@ class ViewController: UIViewController, CBPeripheralManagerDelegate, CBCentralMa
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if section == 0{
-            return "Chat Activity"
+     
+            return "CHAT ACTIVITY"
+
+            
+            
         }else if section == 1{
+            
             tableView.sectionIndexColor = UIColor.darkGrayColor()
-            return "BackGround Devices"
+            return "BACKGROUND DEVICES"
         } else {
             return "Misc"
         }
